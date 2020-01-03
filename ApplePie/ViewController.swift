@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController {
     
@@ -16,12 +17,13 @@ class ViewController: UIViewController {
     var totalWins = 0
     var totalLosses = 0
     
+    
     @IBOutlet var treeImageView: UIImageView!
     @IBOutlet var correctWordLabel: UILabel!
     @IBOutlet var scoreLabel: UILabel!
     @IBOutlet var letterButtons: [UIButton]!
     
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +32,19 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    var currentGame: Game!
+    
+    // Functions
+    
     func newRound() {
-        
+        let newWord = listOfWords.removeFirst()
+        currentGame = Game(word: newWord, incorrectMovesRemaining: incorrectMovesAlowed)
+        updateUI()
+    }
+    
+    func updateUI() {
+        scoreLabel.text = "Побед: \(totalWins), Проигрышей: \(totalLosses)"
+        treeImageView.image = UIImage(named: "Tree \(currentGame.incorrectMovesRemaining)")
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {

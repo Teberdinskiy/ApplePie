@@ -10,5 +10,5 @@ import Foundation
 
 struct Game {
     var word: String
-    var incorrectMovesRemaining: String
+    var incorrectMovesRemaining: Int
 }
